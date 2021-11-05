@@ -1,0 +1,9 @@
+class_name: ApiTester
+modules:
+  enabled: [Helper\Api, PhpBrowser, REST, Asserts]
+  config:
+    PhpBrowser:
+      url: 'https://www.cbr-xml-daily.ru'
+    REST:
+      depends: PhpBrowser
+      url: 'https://www.cbr-xml-daily.ru'
