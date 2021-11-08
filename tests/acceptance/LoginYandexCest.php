@@ -14,9 +14,10 @@ class LoginYandexCest
         $I->click('Войти');
         $I->fillField('login', 'testitplstest');
         $I->click('Войти');
-        $I->fillField('password', '224790hp');
+        $I->wait(5);
+        $I->fillField('passwd', '224790hp');
         $I->click('Войти');
-        $I->see('Сейчас в СМИ');
+
 
     }
 }
