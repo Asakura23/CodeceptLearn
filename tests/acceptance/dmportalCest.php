@@ -21,13 +21,11 @@ class DmportalCest
         $I->fillField('Пароль *', $pass);
         $I->fillField('Код проверки *', $captcha);
         $I->click('Войти');
-        $I->wait(3);
+        $I->waitForText("Смс код", 10);
         $I->fillField('Смс код *', $sms);
         $I->click('Войти');
-        $I->amOnPage('/');
-        $I->wait(4);
+        $I->waitForText("Личный кабинет", 10);
         $I->click('viewOperations');
-        $I->amOnPage('/?page=viewOperations');
 
 
     }
