@@ -27,6 +27,15 @@ class AcceptanceTester extends \Codeception\Actor
 
     use _generated\AcceptanceTesterActions;
 
+    public function comparisonGrabText($number,$count){
+        $count=count($count);
+        if ($number>$count) {
+
+            PHPUnit\Framework\Assert::fail();
+        }
+
+    }
+
     public function haveVisible($element)
     {
         $I = $this;
@@ -62,21 +71,25 @@ class AcceptanceTester extends \Codeception\Actor
     public function loginPortal()
     {
         $I = $this;
-        $I->wantTo('check');
-        $ini_array = parse_ini_file("Dat.ini");
-        $I->amOnPage('/');
-        $login = $ini_array["Login"];
-        $pass = $ini_array["Pass"];
-        $captcha = $ini_array["Captcha"];
-        $sms = $ini_array["Sms"];
-        $I->fillField('Логин *', $login);
-        $I->fillField('Пароль *', $pass);
-        $I->fillField('Код проверки *', $captcha);
-        $I->click('Войти');
-        $I->waitForText("Смс код", 10);
-        $I->fillField('Смс код *', $sms);
-        $I->click('Войти');
-        $I->waitForText("Личный кабинет", 10);
+        if ($I->loadSessionSnapshot('loginPortal')){
+            return;
+        }
+            $ini_array = parse_ini_file("Dat.ini");
+            $I->amOnPage('/');
+            $login = $ini_array["Login"];
+            $pass = $ini_array["Pass"];
+            $captcha = $ini_array["Captcha"];
+            $sms = $ini_array["Sms"];
+            $I->fillField('Логин *', $login);
+            $I->fillField('Пароль *', $pass);
+            $I->fillField('Код проверки *', $captcha);
+            $I->click('Войти');
+            $I->waitForText("Смс код", 10);
+            $I->fillField('Смс код *', $sms);
+            $I->click('Войти');
+            $I->waitForText("Личный кабинет");
+            $I->saveSessionSnapshot('loginPortal');
+
     }
 }
 
