@@ -6,7 +6,7 @@ class dmportalCest
 {
     public function _before(AcceptanceTester $I)
     {
-        $I->wantTo('check');
+        $I->wantTo('check sign in');
         $ini_array = parse_ini_file("Dat.ini");
         $I->amOnPage('/');
         $login = $ini_array["Login"];
@@ -26,7 +26,7 @@ class dmportalCest
 
     public function tryToTest(AcceptanceTester $I)
     {
-
+        $I->wantTo("check divs");
         $I->click('viewOperations');
         $I->waitForText("Экспорт",10);
         $I->checkVisible(".viewOperations");
