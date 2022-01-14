@@ -10,13 +10,16 @@ class tablePortalCest
     // tests
     public function tryToTest(AcceptanceTester $I)
     {
+        $I->wantTo("check table");
         $I->loginPortal();
         $I->click('viewOperations');
         $I->waitForText("Экспорт",10);
         $I->checkVisible(".gridItems.viewOperations");
         $I->waitForElement(".even");
+        $I->wantTo("check information in the table");
         $I->seeElement(".even") or $I->seeElement(".odd");
         $I->checkVisible(".filter");
+        $I->wantTo("check filters in table");
         $I->see("10",['css'=>'table td:nth-child(5)']) and $I->see("Все",['css'=>'table td:nth-child(5)']);
         $I->see("Все",['css'=>'table td:nth-child(6)']) and $I->see("[100] Авторизационное сообщение",['css'=>'table td:nth-child(6)']);
         $I->see("Все",['css'=>'table td:nth-child(9)']) and $I->see("[840] US dollar (USD)",['css'=>'table td:nth-child(9)']);
