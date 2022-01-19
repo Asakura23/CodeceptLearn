@@ -6,7 +6,7 @@ class DmportalCest
 {
     public function _before(AcceptanceTester $I)
     {
-
+        $this->login($I);
 
     }
 
@@ -47,9 +47,7 @@ class DmportalCest
     {
 
 
-        if ($I->loadSessionSnapshot('login')){
-            return;
-        }
+        if ($I->loadSessionSnapshot('login')) return;
         $ini_array= parse_ini_file("/app1/tests/_data/config.ini");
         $I->amOnPage('/');
         $login = $ini_array["Login"];
