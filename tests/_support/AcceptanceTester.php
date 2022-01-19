@@ -27,6 +27,14 @@ class AcceptanceTester extends \Codeception\Actor
 
     use _generated\AcceptanceTesterActions;
 
+    public function checkEnabledOptionAll($allnumber){
+       $disablednumber=array_keys($allnumber,"true");
+       $disablednumber=count($disablednumber);
+       $allnumber=count($allnumber);
+       if (($allnumber-$disablednumber)!=1){
+           PHPUnit\Framework\Assert::fail();
+       }
+    }
     public function comparisonGrabText($number,$count){
         $count=count($count);
         if ($number>$count) {
