@@ -21,28 +21,7 @@ class DmportalCest
             $I->click(['class'=>'closeSession']);
         }
     }
-
-    /*public function login(AcceptanceTester $I)
-    {
-        $I->wantTo("залогиниться");
-        $ini_array = parse_ini_file("Dat.ini");
-        $I->amOnPage('/');
-        $login = $ini_array["Login"];
-        $pass = $ini_array["Pass"];
-        $captcha = $ini_array["Captcha"];
-        $sms = $ini_array["Sms"];
-        $I->fillField('Логин *', $login);
-        $I->fillField('Пароль *', $pass);
-        $I->fillField('Код проверки *', $captcha);
-        $I->click('Войти');
-        $I->waitForText("Смс код", 10);
-        $I->fillField('Смс код *', $sms);
-        $I->click('Войти');
-        $I->waitForText("Личный кабинет", 10);//условный маркер логина
-    }*/
-
-
-
+    
     protected function login(AcceptanceTester $I)
     {
 
