@@ -6,7 +6,8 @@ class DmportalCest
 {
     public function _before(AcceptanceTester $I)
     {
-        $this->login($I);
+        if (!$I->loadSessionSnapshot('login'));
+            $this->login($I);
 
     }
 
@@ -15,6 +16,8 @@ class DmportalCest
 
     }
 
+    // Этот метод срабатывает скорей всего при любом неуспешном тесте(методе)
+    // А нам нужно разлогинится вконце всех тестов, Т.к. в след файле тестов может идти авторизация
     public function _failed(AcceptanceTester $I)
     {
         if ($I->tryToSeeElement('.closeSession')) {
@@ -25,8 +28,9 @@ class DmportalCest
     protected function login(AcceptanceTester $I)
     {
 
-
-        if ($I->loadSessionSnapshot('login')) return;
+        if ($I->tryToSeeElement('.closeSession')) {
+            $I->click(['class'=>'closeSession']);
+        }
         $ini_array= parse_ini_file("/app1/tests/_data/config.ini");
         $I->amOnPage('/');
         $login = $ini_array["Login"];
@@ -155,6 +159,7 @@ class DmportalCest
         $I->click(" .sort");
     }
 
+    // Это сам придумал или метод такой есть Exit?
     public function exit(AcceptanceTester $I)
     {
         if ($I->tryToSeeElement('.closeSession')) {
